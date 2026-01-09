@@ -1,0 +1,14 @@
+1️⃣ First-seen subdomain naming
+If studio.youtube.com opens first:
+Group name becomes studio
+Later youtube.com joins it
+Acceptable for v1, but:
+Easy fix later (rename on root detection)
+
+2️⃣ No auto-group on open (yet)
+Manual click is fine for MVP
+Auto-group can be Phase-2.
+
+3️⃣ No user customization
+No rules, toggles, or preferences yet
+Again — correct to skip in v1.
