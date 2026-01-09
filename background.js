@@ -19,7 +19,6 @@ chrome.runtime.onMessage.addListener((message) => {
         chrome.tabs.query({ currentWindow: true }, (tabs) => {
 
             const domainMap = {};
-            const existingDomains = new Set();
 
             tabs.forEach(tab => {
                 if (!tab.url || tab.url.startsWith("chrome://")) return;
@@ -28,12 +27,10 @@ chrome.runtime.onMessage.addListener((message) => {
                     const url = new URL(tab.url);
                     const hostname = url.hostname;
                     const parts = hostname.split(".");
-                    // const domain = parts[0] === 'www' ? parts[1] : parts[0]
-                    const domain = getDomainKey(parts, existingDomains);
+                    const domain = parts[0] === 'www' ? parts[1] : parts[0]
 
                     if (!domainMap[domain]) {
                         domainMap[domain] = [];
-                        existingDomains.add(domain);
                     }
 
                     domainMap[domain].push(tab.id);
@@ -72,48 +69,3 @@ chrome.runtime.onMessage.addListener((message) => {
     }
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Phase 1---------------------------------------------------------------------
-
-// console.log("✅ Background service worker loaded");
-
-// chrome.runtime.onMessage.addListener((message) => {
-//     if (message.action === "GROUP_CHATGPT_TABS") {
-
-//         chrome.tabs.query({ currentWindow: true }, (tabs) => {
-//             const chatgptTabs = tabs
-//                 .filter(tab => tab.url && tab.url.includes("chatgpt.com"))
-//                 .map(tab => tab.id);
-
-//             if (chatgptTabs.length < 2) return;
-
-//             // ✅ CORRECT: group tabs using chrome.tabs.group
-//             chrome.tabs.group({ tabIds: chatgptTabs }, (groupId) => {
-
-//                 // ✅ CORRECT: update group using chrome.tabGroups
-//                 chrome.tabGroups.update(groupId, {
-//                     title: "ChatGPT",
-//                     color: "green"
-//                 });
-
-//             });
-//         });
-//     }
-// });
