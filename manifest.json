@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "Tab Grouper",
+  "version": "1.0",
+  "description": "Groups tabs by domain and keeps them collapsed",
+  "permissions": ["tabs", "tabGroups"],
+
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icons/tabs.png"
+  },
+
+  "icons": {
+    "16": "icons/tabs.png",
+    "32": "icons/tabs.png",
+    "48": "icons/tabs.png",
+    "128": "icons/tabs.png"
+  },
+
+  "background": {
+    "service_worker": "background.js"
+  }
+}
