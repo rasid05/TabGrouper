@@ -38,5 +38,32 @@ Chrome provides tab groups, but manual grouping is slow and repetitive.
 
 ---
 
-## 🏗️ Project Structure
+## 🔧 How Grouping Works
+
+### Domain Detection Logic
+
+- URL hostname is split into parts
+- Noise like `www` is ignored
+- If any hostname part already exists as a group key, it is reused
+- Otherwise, the first meaningful part becomes the group name
+
+### Examples
+
+| URL | Group Name |
+|---|---|
+| `youtube.com` | youtube |
+| `studio.youtube.com` | youtube |
+| `music.youtube.com` | youtube |
+| `docs.google.com` | google |
+| `cutm.ac.in` | cutm |
+
+---
+
+## 👁️ Active Tab Protection
+
+The group containing the active tab is kept open.
+
+```js
+collapsed: !tabIds.includes(activeTabId)
+
 
